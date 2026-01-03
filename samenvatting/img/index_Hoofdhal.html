@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hoofdhal – Vertrekbord</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    table {
+      width: 90%;
+      border-collapse: collapse;
+      font-size: 2.6rem;
+      box-shadow: 0 6px 40px rgba(0,0,0,0.3);
+    }
+
+    thead {
+      background-color: #6d68aa;
+      color: #fff;
+      font-family: 'Roboto Slab', serif;
+      font-size: 2.8rem;
+     
+    }
+
+    th, td {
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: #2f2b55;
+      color: #fff;
+    }
+    tbody tr:nth-child(even) {
+      background-color: #bcb9d3;
+      color: #1d1a3a;
+    }
+
+    tr {
+      border-bottom: 10px solid #fff;
+    }
+
+    .time, .type, .number, .status {
+      text-align: center;
+      font-weight: 600;
+    }
+    .destination {
+      width: 50%;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th>🕒</th>
+        <th>TYPE</th>
+        <th>NL / FR / EN</th>
+        <th>#</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="time">13:00</td><td class="type">IC</td><td class="destination">Luik / Liège / Liège</td><td class="number">1</td><td class="status">+2</td></tr>
+      <tr><td class="time">13:15</td><td class="type">S</td><td class="destination">Leuven / Louvain / Leuven</td><td class="number">2</td><td class="status">X</td></tr>
+      <tr><td class="time">13:30</td><td class="type">ICE</td><td class="destination">Antwerpen / Anvers / Antwerp</td><td class="number">3</td><td class="status">✔</td></tr>
+      <tr><td class="time">13:45</td><td class="type">IC</td><td class="destination">Brussel / Bruxelles / Brussels</td><td class="number">4</td><td class="status">✔</td></tr>
+      <tr><td class="time">14:00</td><td class="type">THA</td><td class="destination">Parijs / Paris / Paris</td><td class="number">5</td><td class="status">✔</td></tr>
+      <tr><td class="time">14:15</td><td class="type">IC</td><td class="destination">Lier / Lierre / Lier</td><td class="number">6</td><td class="status">✔</td></tr>
+      <tr><td class="time">14:30</td><td class="type">IC</td><td class="destination">Turnhout / Turnhout / Turnhout</td><td class="number">7</td><td class="status">✔</td></tr>
+      <tr><td class="time">14:45</td><td class="type">IC</td><td class="destination">Mol / Mol / Mol</td><td class="number">8</td><td class="status">✔</td></tr>
+      <tr><td class="time">15:00</td><td class="type">IC</td><td class="destination">Blankenberge / Blankenberge / Blankenberge</td><td class="number">9</td><td class="status">✔</td></tr>
+      <tr><td class="time">15:15</td><td class="type">IC</td><td class="destination">Oostende / Ostende / Ostend</td><td class="number">10</td><td class="status">✔</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>
