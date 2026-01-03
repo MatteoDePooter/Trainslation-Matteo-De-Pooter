@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perron – Trein Detail</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    header {
+      background-color: #6d68aa;
+      color: white;
+      padding: 40px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 2.4rem;
+      font-family: 'Roboto Slab', serif;
+    }
+
+    .info {
+      background-color: #bcb9d3;
+      padding: 60px 100px;
+      font-size: 2rem;
+      display: flex;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .info strong {
+      font-family: 'Roboto Slab', serif;
+      font-size: 3rem;
+    }
+
+    .stops {
+      background-color: #2f2b55;
+      color: #bcb9d3;
+      padding: 80px 100px;
+      font-size: 1.8rem;
+    }
+
+    .stops h2 {
+      font-family: 'Roboto Slab', serif;
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      background-color: #bcb9d3;
+      color: #1d1a3a;
+      padding: 40px 100px;
+      font-size: 2rem;
+      font-family: 'Roboto Slab', serif;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>14:30 – Turnhout</div>
+    <div>IC #3348</div>
+  </header>
+
+  <div class="info">
+    <strong>Trein:</strong> IC 3348 <span>→ Turnhout</span>
+  </div>
+
+  <div class="stops">
+    <h2>Haltes:</h2>
+    <p>
+      Antwerpen-Berchem / Anvers-Berchem / Antwerp-Berchem,<br>
+      Lier / Lierre / Lier, Herentals / Herentals / Herentals,<br>
+      Tielen / Tielen / Tielen, Turnhout / Turnhout / Turnhout.
+    </p>
+  </div>
+
+  <footer>
+    Status : +2 min
+  </footer>
+</body>
+</html>
