@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Portfolio | Matteo De Pooter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { 
+      --radius: 180px; 
+      --circle-size: 60px;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background-color: #f8fafc;
+      scroll-behavior: smooth;
+    }
+
+    nav {
+      position: sticky !important;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    nav { 
+      z-index: 9999 !important; 
+      position: sticky; 
+      top: 0; 
+    }
+
+    .hero-fold {
+      min-height: 1vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Extra padding bovenaan zodat de cirkel niet tegen de nav plakt */
+    #wheel-container {
+      position: relative;
+      width: 100%;
+      height: 500px; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      touch-action: none;
+      margin-top: 2rem; 
+    }
+
+    #wheel {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0; 
+      height: 0;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+
+    .center-info {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 20;
+      pointer-events: none;
+      width: 100%;
+    }
+
+    .week-item {
+      position: absolute;
+      left: 0; 
+      top: 0;
+      width: var(--circle-size); 
+      height: var(--circle-size);
+      margin-left: calc(var(--circle-size) / -2);
+      margin-top: calc(var(--circle-size) / -2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .week-circle {
+      width: 100%; height: 100%;
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #94a3b8;
+      transition: all 0.4s;
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      text-decoration: none;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .week-circle.active {
+      border-color: #6366f1;
+      background: #6366f1;
+      color: white;
+      transform: scale(1.2);
+      box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+    }
+
+    #vorigevolgende {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding-bottom: 2rem;
+      z-index: 60;
+    }
+
+    .nav-btn {
+      padding: 0.8rem 2rem;
+      border-radius: 9999px;
+      background-color: #0f172a;
+      color: white;
+      font-weight: 700;
+      font-size: 0.8rem;
+      transition: 0.3s;
+    }
+
+    #cardGrid {
+      display: flex;
+      gap: 2rem;
+      padding: 2rem 5vw 4rem 5vw;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    #cardGrid::-webkit-scrollbar { display: none; }
+
+    .report-card {
+      min-width: 280px;
+      scroll-snap-align: center;
+      background: white;
+      border-radius: 2rem;
+      padding: 2.5rem;
+      position: relative;
+      border: 1px solid #e2e8f0;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+
+    .report-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .bg-number-card {
+      position: absolute;
+      right: -5px; bottom: -10px;
+      font-size: 6rem;
+      font-weight: 900;
+      color: rgba(99, 102, 241, 0.04);
+      z-index: 0;
+    }
+
+    .report-card:hover {
+      transform: translateY(-12px);
+      border-color: #6366f1;
+      box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.15);
+    }
+
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .bg-number {
+        position: fixed;
+        /* Kies 'right: 0' voor rechts of 'left: 0' voor links */
+        right: 0; 
+        top: 50%;
+        transform: translateY(-50%);
+
+        font-size: 15rem; /* Pas dit getal aan voor de grootte */
+        font-weight: 900;
+        line-height: 1;
+
+        /* Kleur: heel licht grijs/blauw zodat het de tekst niet stoort */
+        color: rgba(54, 57, 255, 0.404); 
+
+        z-index: -1; /* Achter de tekst */
+        pointer-events: none; /* Je kunt er 'doorheen' klikken */
+        user-select: none; /* Tekst is niet selecteerbaar */
+        font-family: 'Inter', sans-serif;
+      }
+
+      :root { 
+        --radius: 140px;
+        --circle-size: 50px;
+      }
+
+      #wheel-container { 
+        height: 400px; 
+        margin-top: 1rem; 
+      }
+
+      #info-title { 
+        font-size: 1rem !important; 
+      }
+    }
+
+    /* C. IPHONE / MOBIEL (Kleine schermen - breedte container is ~320px) */
+    @media (max-width: 640px) {
+      .bg-number {
+        position: fixed;
+        /* Kies 'right: 0' voor rechts of 'left: 0' voor links */
+        right: 0; 
+        top: 50%;
+        transform: translateY(-50%);
+        
+        font-size: 8rem; /* Pas dit getal aan voor de grootte */
+        font-weight: 900;
+        line-height: 1;
+        
+        /* Kleur: heel licht grijs/blauw zodat het de tekst niet stoort */
+        color: rgba(54, 57, 255, 0.404); 
+        
+        z-index: -1; /* Achter de tekst */
+        pointer-events: none; /* Je kunt er 'doorheen' klikken */
+        user-select: none; /* Tekst is niet selecteerbaar */
+        font-family: 'Inter', sans-serif;
+      }
+
+      :root { 
+        --radius: 140px;
+        --circle-size: 50px;
+      }
+      #wheel-container { 
+        height: 400px; 
+        margin-top: 1rem; 
+      }
+      #info-title { 
+        font-size: 1.25rem !important; 
+      }
+    }
+  </style>
+</head>
+<body>
+
+   <nav class="sticky top-0 z-[100] bg-white/60 backdrop-blur-xl border-b border-slate-200/50">
+  <div class="max-w-6xl mx-auto px-6 md:px-8 h-20 flex items-center justify-between">
+    <a href="index.html" class="flex items-center">
+      <span class="text-lg md:text-xl font-black tracking-tighter bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent italic">
+        MATTEO <span class="text-indigo-600">DE POOTER</span> <span class="text-slate-400 font-light ml-2 not-italic text-xs md:text-sm">1GDM1</span>
+      </span>
+    </a>
+    <div class="flex items-center gap-6 md:gap-10 text-[10px] md:text-sm font-bold tracking-widest uppercase">
+      <a href="Project-documentatie.pdf" download class="text-slate-400 hover:text-indigo-600 transition">Download de PDF</a>
+      <a href="index.html" class="text-indigo-600 border-b-2 border-indigo-600 pb-1">Home</a>
+      <a href="reports.html" class="text-slate-400 hover:text-indigo-600 transition">Reports</a>
+    </div>
+  </div>
+</nav>
+
+  <div class="hero-fold">
+    <header class="pt-10 text-center">
+      <h1 class="text-4xl md:text-6xl font-black uppercase leading-tight">
+        Weekly<br><span class="bg-gradient-to-r from-indigo-600 to-pink-500 bg-clip-text text-transparent">Journal.</span>
+      </h1>
+    </header>
+
+    <div id="wheel-container">
+      <div class="center-info">
+        <span id="info-desc" class="text-indigo-600 font-black tracking-widest text-xs uppercase">Week 01</span>
+        <h3 id="info-title" class="text-2xl md:text-3xl font-black text-slate-900">De Opstart</h3>
+      </div>
+      <div id="wheel"></div>
+    </div>
+
+    <div id="vorigevolgende">
+      <button onclick="navigate(1)" class="nav-btn">← VORIGE</button>
+      <button onclick="navigate(-1)" class="nav-btn">VOLGENDE →</button>
+    </div>
+  </div>
+
+  <section class="bg-slate-50 border-t border-slate-100">
+    <div id="cardGrid"></div>
+  </section>
+
+  <footer class="py-12 text-center text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+    <p>© Matteo De Pooter — 1GDM1 — <a target="_blank" href="https://github.com/MatteoDePooter/Matteo-De-Pooter" class="text-indigo-600 underline">GitHub</a></p>
+  </footer>
+
+  <script>
+    const reports = [
+      { w: "01", t: "De Opstart.", d: "Eerste Website.", l: "Week1.html" },
+      { w: "02", t: "Low-Fidality Prototypes.", d: "Concepten Schermen.", l: "week2.html" },
+      { w: "03", t: "Midi-Prototypes.", d: "Eerste Figma Scherm.", l: "Week3.html" },
+      { w: "04", t: "Code Midi-Prototypes.", d: "Omzetting.", l: "week4.html" },
+      { w: "05", t: "Tailwind.", d: "Installeren van Tailwind.", l: "week5.html" },
+      { w: "06", t: "Tailwind Met Onze Website.", d: "Toepassing.", l: "week6.html" },
+      { w: "07", t: "Finalizeren.", d: "Het Eind Resultaat.", l: "week7.html" }
+    ];
+
+    const wheel = document.getElementById('wheel');
+    const cardGrid = document.getElementById('cardGrid');
+    
+    // We verdelen de cirkel over 360 graden voor een perfect ronde vorm
+    const totalItems = reports.length;
+    const angleStep = 360 / totalItems; 
+
+    reports.forEach((r, i) => {
+      wheel.innerHTML += `
+        <div class="week-item" style="transform: rotate(${i * angleStep}deg) translateY(calc(-1 * var(--radius)))">
+          <a href="${r.l}" class="week-circle ${i===0?'active':''}" data-index="${i}">${r.w}</a>
+        </div>`;
+      
+      cardGrid.innerHTML += `
+        <a href="${r.l}" class="report-card group">
+          <div class="bg-number-card">${r.w}</div>
+          <span class="text-3xl font-black text-indigo-600/20 italic">${r.w}</span>
+          <h3 class="text-xl font-bold mt-2 text-slate-800">${r.t}</h3>
+          <p class="text-slate-400 text-xs mt-1 uppercase tracking-widest">${r.d}</p>
+        </a>`;
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.report-card').forEach(card => observer.observe(card));
+
+    let currentRotation = 0;
+    const circles = document.querySelectorAll('.week-circle');
+
+    function navigate(direction) {
+      currentRotation += (direction * angleStep);
+      rotateTo(currentRotation);
+    }
+
+    function rotateTo(deg) {
+      wheel.style.transform = `rotate(${deg}deg)`;
+      
+      let activeIndex = Math.round((deg / -angleStep) % totalItems);
+      if (activeIndex < 0) activeIndex += totalItems;
+
+      circles.forEach((circle, i) => {
+        circle.style.transform = `rotate(${- (i * angleStep) - deg}deg)`;
+        circle.classList.toggle('active', i === activeIndex);
+        
+        if(i === activeIndex) {
+          document.getElementById('info-title').innerText = reports[activeIndex].t;
+          document.getElementById('info-desc').innerText = "WEEK " + reports[activeIndex].w;
+          
+          const cards = document.querySelectorAll('.report-card');
+          if(cards[activeIndex]) {
+             cardGrid.scrollTo({ left: cards[activeIndex].offsetLeft - 40, behavior: 'smooth' });
+          }
+        }
+      });
+    }
+
+    let isDragging = false; let startX = 0;
+    const container = document.getElementById('wheel-container');
+
+    const start = (x) => { isDragging = true; startX = x; wheel.style.transition = 'none'; };
+    const move = (x) => {
+      if (!isDragging) return;
+      const shift = (x - startX) * 0.2;
+      wheel.style.transform = `rotate(${currentRotation + shift}deg)`;
+      circles.forEach((c, i) => c.style.transform = `rotate(${- (i * angleStep) - (currentRotation + shift)}deg)`);
+    };
+    const end = (x) => {
+      if (!isDragging) return;
+      isDragging = false;
+      wheel.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      currentRotation = Math.round((currentRotation + (x - startX) * 0.2) / angleStep) * angleStep;
+      rotateTo(currentRotation);
+    };
+
+    container.onmousedown = (e) => start(e.pageX);
+    window.onmousemove = (e) => move(e.pageX);
+    window.onmouseup = (e) => end(e.pageX);
+    container.ontouchstart = (e) => start(e.touches[0].pageX);
+    container.ontouchmove = (e) => move(e.touches[0].pageX);
+    container.ontouchend = (e) => end(e.changedTouches[0].pageX);
+
+    rotateTo(0);
+  </script>
+</body>
+</html>

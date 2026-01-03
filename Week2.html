@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 2 | Matteo De Pooter</title>
+  <link href="dist/output.css" rel="stylesheet">
+</head>
+
+<style>
+  .op75{
+    opacity: 75%;
+  }
+
+  #img{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+  }
+
+  nav { 
+    z-index: 9999 !important; 
+    position: sticky; 
+    top: 0; 
+  }  
+
+  /* De container (header) moet relatief zijn om het nummer te positioneren */
+  header {
+    position: relative;
+    overflow: visible; /* Zorg dat het nummer eventueel buiten de header mag steken */
+  }
+
+  .bg-number {
+    position: fixed;
+    /* Kies 'right: 0' voor rechts of 'left: 0' voor links */
+    right: 0; 
+    top: 50%;
+    transform: translateY(-50%);
+    
+    font-size: 20rem; /* Pas dit getal aan voor de grootte */
+    font-weight: 900;
+    line-height: 1;
+    
+    /* Kleur: heel licht grijs/blauw zodat het de tekst niet stoort */
+    color: rgba(54, 57, 255, 0.404);
+    
+    z-index: -1; /* Achter de tekst */
+    pointer-events: none; /* Je kunt er 'doorheen' klikken */
+    user-select: none; /* Tekst is niet selecteerbaar */
+    font-family: 'Inter', sans-serif;
+  }
+
+  header{
+    z-index: -1;
+  }
+
+    /* B. TABLET (iPad - breedte container is ~600px) */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .scale-4k iframe { transform: scale(0.165); } /* 320/3840 */
+    .scale-4k2 iframe { transform: scale(0.145); } /* 320/3840 */
+    .scale-1080p iframe { transform: scale(0.29); } /* 320/1920 */
+    #height1 {height: 14.7em;}
+    #height2 {height: 15.2em;}
+    #height3 {height: 15.5em;}
+    .bg-number {
+      position: fixed;
+      /* Kies 'right: 0' voor rechts of 'left: 0' voor links */
+      right: 0; 
+      top: 50%;
+      transform: translateY(-50%);
+
+      font-size: 15rem; /* Pas dit getal aan voor de grootte */
+      font-weight: 900;
+      line-height: 1;
+
+      /* Kleur: heel licht grijs/blauw zodat het de tekst niet stoort */
+      color: rgba(54, 57, 255, 0.404); 
+
+      z-index: -1; /* Achter de tekst */
+      pointer-events: none; /* Je kunt er 'doorheen' klikken */
+      user-select: none; /* Tekst is niet selecteerbaar */
+      font-family: 'Inter', sans-serif;
+    }
+
+  }
+
+  /* C. IPHONE / MOBIEL (Kleine schermen - breedte container is ~320px) */
+  @media (max-width: 640px) {
+    .scale-4k iframe { transform: scale(0.125); } /* 320/3840 */
+    .scale-4k2 iframe { transform: scale(0.112); } /* 320/3840 */
+    .scale-1080p iframe { transform: scale(0.225); } /* 320/1920 */
+    #height1 {height: 11em;}
+    #height2 {height: 11.75em;}
+    #height3 {height: 12em;}
+    #container-main{width: 491px;}
+    .bg-number {
+    position: fixed;
+    /* Kies 'right: 0' voor rechts of 'left: 0' voor links */
+    right: 0; 
+    top: 50%;
+    transform: translateY(-50%);
+    
+    font-size: 8rem; /* Pas dit getal aan voor de grootte */
+    font-weight: 900;
+    line-height: 1;
+    
+    /* Kleur: heel licht grijs/blauw zodat het de tekst niet stoort */
+    color: rgba(54, 57, 255, 0.404); 
+    
+    z-index: -1; /* Achter de tekst */
+    pointer-events: none; /* Je kunt er 'doorheen' klikken */
+    user-select: none; /* Tekst is niet selecteerbaar */
+    font-family: 'Inter', sans-serif;
+    }
+  }
+
+</style>
+
+<body class="bg-slate-50 text-slate-900 min-h-screen font-sans">
+
+  <div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute -top-[10%] -right-[10%] w-[40%] h-[40%] rounded-full bg-indigo-100/50 blur-[120px]"></div>
+    <div class="absolute bottom-[10%] -left-[5%] w-[30%] h-[30%] rounded-full bg-purple-100/50 blur-[100px]"></div>
+  </div>
+
+  <nav class="sticky top-0 z-[100] bg-white/60 backdrop-blur-xl border-b border-slate-200/50">
+    <div class="max-w-6xl mx-auto px-6 md:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center">
+        <span class="text-lg md:text-xl font-black tracking-tighter bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent italic">
+          MATTEO <span class="text-indigo-600">DE POOTER</span> <span class="text-slate-400 font-light ml-2 not-italic text-xs md:text-sm">1GDM1</span>
+        </span>
+      </a>
+      <div class="flex items-center gap-6 md:gap-10 text-[10px] md:text-sm font-bold tracking-widest uppercase">
+        <a href="Project-documentatie.pdf" download class="text-slate-400 hover:text-indigo-600 transition">Download de PDF</a>
+        <a href="index.html" class="text-slate-400 hover:text-indigo-600 transition">Home</a>
+        <a href="reports.html" class="text-slate-400 hover:text-indigo-600 transition">Reports</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-3xl mx-auto px-8 py-20">
+    
+    <header class="mb-16">
+      <header class="mb-16">
+        <div class="text-indigo-600 bg-number">02</div>
+      </header>
+      <div class="inline-block px-4 py-1 rounded-full bg-indigo-600 text-white text-xs font-bold uppercase tracking-[0.2em] mb-6">
+        Week 02
+      </div>
+      <h1 class="text-5xl md:text-6xl font-black tracking-tight mb-4">Low-Fidality Prototypes.</h1>
+      <div class="h-2 w-24 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full"></div>
+    </header>
+
+    <article class="space-y-12">
+      
+      <section class="bg-white/80 op75 p-10 rounded-[2rem] border border-white shadow-sm">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
+          <span class="text-indigo-600">01.</span> Wat hebben we gedaan?
+        </h2>
+        <p class="text-slate-600 leading-relaxed italic">
+          We kregen hier de opdracht om concepten te maken voor een perronscherm, wagonscherm en een stationscherm.
+      </section>
+
+      <section class="bg-white/80 op75 p-10 rounded-[2rem] border border-white shadow-sm">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
+          <span class="text-purple-600">02.</span> Process
+        </h2>
+        <div class="space-y-4 text-slate-600 leading-relaxed">
+          <div id="img" class="bg-slate-900 p-6 rounded-2xl font-mono text-sm">
+            <p class="text-2xl font-bold mb-4 flex items-center gap-3">Stationscherm :</p>
+            <img src="/img/2526_PRTT_Oefening1.1-1.png" alt="Stationscherm" class="rounded-2xl shadow-lg">
+            <p class="text-2xl font-bold mb-4 flex items-center gap-3">Perronscherm :</p>
+            <img src="/img/2526_PRTT_Oefening1.2-1.png" alt="Perronscherm" class="rounded-2xl shadow-lg">
+            <p class="text-2xl font-bold mb-4 flex items-center gap-3">Wagonscherm :</p>
+            <img src="/img/2526_PRTT_Oefening1.3-1.png" alt="Wagonscherm" class="rounded-2xl shadow-lg">
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white/80 op75 p-10 rounded-[2rem] border border-white shadow-sm">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
+          <span class="text-pink-600">03.</span> Reflectie
+        </h2>
+        <p class="text-slate-600 leading-relaxed">
+          Ik had bij het perronscherm wel wat beter kunnen werken met het schrijven van de stops en bij het stationscherm eignelijk ook.
+        </p>
+      </section>
+
+    </article>
+
+    <div class="mt-20 flex justify-between items-center border-t border-slate-200 pt-10">
+      <a href="Reports.html" class="text-slate-400 font-bold hover:text-indigo-600 transition">← OVERZICHT</a>
+      <a href="Week3.html" class="px-6 py-3 bg-indigo-600 text-white rounded-full font-bold hover:bg-purple-600 transition shadow-lg shadow-indigo-200">
+        VOLGENDE WEEK →
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="py-12 text-center text-slate-400 text-xs font-bold uppercase tracking-widest">
+    <p>© Matteo De Pooter — 1GDM1 — <a target="_blank" href="https://github.com/MatteoDePooter/Matteo-De-Pooter" class="text-indigo-600 underline">GitHub</a></p>
+  </footer>
+
+</body>
+</html>

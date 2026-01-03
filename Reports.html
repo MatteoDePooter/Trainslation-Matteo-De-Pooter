@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Matteo De Pooter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    #cardGrid {
+      display: flex;
+      gap: 2rem;
+      padding: 3rem 10vw; 
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      cursor: grab;
+    }
+
+    .report-card {
+      min-width: 320px;
+      max-width: 320px;
+      scroll-snap-align: center;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 2.5rem;
+      padding: 2.5rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .report-card:hover {
+      transform: translateY(-12px);
+      border-color: #6366f1;
+      box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.15);
+    }
+
+    #cardGrid {
+    padding: 2rem 5vw; /* Minder padding op kleine schermen */
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    #cardGrid {
+      padding: 3rem 10vw;
+      gap: 2.5rem;
+    }
+  }
+
+  /* Zorg dat de navigatiepijlen op mobiel minder ruimte innemen */
+  @media (max-width: 640px) {
+    .text-7xl { font-size: 4rem; }
+    #prevBtn, #nextBtn { width: 3rem; height: 3rem; }
+  }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans overflow-x-hidden">
+
+   <nav class="sticky top-0 z-[100] bg-white/60 backdrop-blur-xl border-b border-slate-200/50">
+  <div class="max-w-6xl mx-auto px-6 md:px-8 h-20 flex items-center justify-between">
+    <a href="index.html" class="flex items-center">
+      <span class="text-lg md:text-xl font-black tracking-tighter bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent italic">
+        MATTEO <span class="text-indigo-600">DE POOTER</span> <span class="text-slate-400 font-light ml-2 not-italic text-xs md:text-sm">1GDM1</span>
+      </span>
+    </a>
+    <div class="flex items-center gap-6 md:gap-10 text-[10px] md:text-sm font-bold tracking-widest uppercase">
+      <a href="Project-documentatie.pdf" download class="text-slate-400 hover:text-indigo-600 transition">Download de PDF</a>
+      <a href="index.html" class="text-slate-400 hover:text-indigo-600 transition">Home</a>
+      <a href="reports.html" class=" text-indigo-600 border-b-2 border-indigo-600 pb-1">Reports</a>
+    </div>
+  </div>
+</nav>
+
+  <main class="flex-grow flex flex-col">
+    <header class="shrink-0 pt-6 pb-2 text-center px-4">
+    <h1 class="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none">
+      Weekly<br><span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">Journal.</span>
+    </h1>
+  </header>
+
+    <section class="relative w-full overflow-hidden mb-24">
+      <div class="absolute inset-y-0 w-full flex justify-between items-center px-4 md:px-10 z-50 pointer-events-none">
+        <button id="prevBtn" class="pointer-events-auto w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center border border-slate-100 hover:bg-indigo-600 hover:text-white transition-all active:scale-90">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button id="nextBtn" class="pointer-events-auto w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center border border-slate-100 hover:bg-indigo-600 hover:text-white transition-all active:scale-90">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <div id="cardGrid" class="no-scrollbar">
+        </div>
+    </section>
+  </main>
+
+  <footer class="py-12 text-center text-slate-400 text-xs font-bold uppercase tracking-widest">
+    <p>© Matteo De Pooter — 1GDM1 — <a target="_blank" href="https://github.com/MatteoDePooter/Matteo-De-Pooter" class="text-indigo-600 underline">GitHub</a></p>
+  </footer>
+
+  <script>
+    const reports = [
+      { w: "01", t: "De Opstart", d: "Eerste Website", l: "Week1.html" },
+      { w: "02", t: "Low-Fidality Prototypes", d: "Concepten Schermen", l: "week2.html" },
+      { w: "03", t: "Midi-Prototypes", d: "Eerste Figma Scherm", l: "Week3.html" },
+      { w: "04", t: "Code Midi-Prototypes", d: "", l: "week4.html" },
+      { w: "05", t: "Tailwind", d: "Installeren van Tailwind", l: "week5.html" },
+      { w: "06", t: "Tailwind Met Onze Website", d: "Toepassing", l: "week6.html" },
+      { w: "07", t: "Finalizeren", d: "Het Eind Resultaat", l: "week7.html" }
+    ];
+
+    const grid = document.getElementById('cardGrid');
+    
+    reports.forEach(r => {
+      grid.innerHTML += `
+        <a href="${r.l}" class="report-card group">
+          <div>
+            <span class="text-5xl font-black text-indigo-600/20 group-hover:text-indigo-600 transition-colors italic block leading-none">${r.w}</span>
+            <h3 class="text-xl font-bold text-slate-900 mt-6 group-hover:text-indigo-600 transition-colors">${r.t}</h3>
+            <p class="text-slate-400 text-xs mt-2 font-medium">${r.d}</p>
+          </div>
+          <div class="mt-10 flex items-center gap-2 text-indigo-600 font-bold text-[9px] uppercase tracking-widest">
+            View Report <div class="w-6 h-px bg-indigo-600 group-hover:w-10 transition-all"></div>
+          </div>
+        </a>
+      `;
+    });
+
+    const scrollAmount = 352;
+    document.getElementById('nextBtn').onclick = () => grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    document.getElementById('prevBtn').onclick = () => grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+
+    let isDown = false; let startX; let scrollLeft;
+    grid.onmousedown = (e) => { isDown = true; startX = e.pageX - grid.offsetLeft; scrollLeft = grid.scrollLeft; grid.style.scrollBehavior = 'auto'; };
+    grid.onmouseleave = () => isDown = false;
+    grid.onmouseup = () => { isDown = false; grid.style.scrollBehavior = 'smooth'; };
+    grid.onmousemove = (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - grid.offsetLeft;
+      grid.scrollLeft = scrollLeft - (x - startX) * 2;
+    };
+  </script>
+
+</body>
+</html>
